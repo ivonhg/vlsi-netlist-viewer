@@ -1,32 +1,60 @@
-# VLSI Netlist Visualizer & EDA Data Model (C++ / Qt)
+# Hierarchical VLSI Netlist Viewer & EDA Data Model
 
-A lightweight Electronic Design Automation (EDA) tool developed in C++ and Qt to model, parse, and visually inspect hierarchical electronic netlists.
+An Electronic Design Automation (EDA) schematic visualizer and object-oriented netlist modeling framework written in **C++** and **Qt 5**.
 
-## Demo
-![VLSI Netlist Viewer - Half Adder Demo](doc/ex2.png)
+![VLSI Netlist Viewer Demo](doc/ex2.png)
 
 ## Overview
-This project implements a complete object-oriented infrastructure for VLSI circuit representation:
-- **Core Data Model:** In-memory representation of hierarchical circuits (`Cell`, `Instance`, `Net`, `Node`, `Term`).
-- **Serialization:** Custom XML parser and driver for circuit storage and interchange.
-- **Graphic Engine:** 2D interactive layout rendering engine powered by Qt (`QPainter`), supporting zoom, pan, and component selection.
+Modern VLSI CAD flows rely on robust internal graph representations to manipulate integrated circuit netlists. This project implements a full software stack capable of parsing hierarchical netlist descriptions, building an in-memory connectivity graph, and rendering circuit schematics interactively with Qt.
 
-## Key Features
-- **Hierarchical Circuit Navigation:** Inspect top-level designs down to sub-circuit instances.
-- **Memory Optimization:** Deterministic memory management and pointer-safe graph structures.
-- **Geometric Symbol Representation:** Precise shape rendering (bounding boxes, pins, terminals).
+## Key Architectural Highlights
+
+### 1. Object-Oriented Netlist Engine
+- **Hierarchical Graph Representation:** Modeled cells, instances, nets, nodes, and bidirectional terminals (`Cell`, `Instance`, `Net`, `Node`, `Term`).
+- **Memory Safety & Ownership:** Strict encapsulation using modern C++ design patterns (rule of three/five, virtual destructors), eliminating circular reference leaks in cyclic net topologies.
+- **Efficient Traversal:** Encapsulated custom iterators and STL container abstractions to traverse complex connectivity networks without exposing internal storage.
+
+### 2. Serialization & Interchange (XML Engine)
+- **Custom XML Driver:** Fully decoupled serialization pipeline capable of parsing and emitting standard circuit syntax.
+- **Integrity Validation:** In-flight connectivity checks ensuring resolved instance terminals match master cell interfaces before instantiating the memory graph.
+
+### 3. Interactive Graphical Rendering (Qt / QPainter)
+- **Model-View Separation:** Strict isolation between the core topological netlist model and the 2D layout rendering engine (`CellWidget`, `Symbol`, `Shape`).
+- **Dynamic Geometric Modeling:** Bounding-box calculations, vector-based logic gate symbols (AND, XOR, transistors), and terminal alignment algorithms.
+- **Interactive Inspection:** Interactive cell selector enabling real-time switching between hierarchical logic blocks (e.g., standard cells to full/half adders).
 
 ## Tech Stack
-- **Language:** C++ (C++11/14)
-- **GUI Framework:** Qt 5
-- **Build System:** CMake / Make
-- **Testing & Profiling:** Valgrind, GDB
+- **Language:** C++ (C++11/C++14)
+- **GUI Engine:** Qt 5 (`QtWidgets`, `QPainter`)
+- **Validation & Profiling:** Valgrind (Memcheck), GDB
+- **Build System:** Make / CMake
 
-## Building & Running
+## Architecture Overview
+[XML Netlist File]
+│
+▼ (Parser / Deserializer)
+┌────────────────────────────────────────┐
+│             Core Data Model            │
+│  Cell ──< Instance ──< Net ──< Node    │
+└──────────────────┬─────────────────────┘
+│ (Signals / Slots & Event Loop)
+▼
+┌────────────────────────────────────────┐
+│             Qt GUI Engine              │
+│   CellWidget ── QPainter ── Symbol     │
+└────────────────────────────────────────┘
+
+## Running the Application
 ```bash
-mkdir build && cd build
-cmake ..
+# Clone the repository
+git clone [https://github.com/](https://github.com/)<username>/<repo-name>.git
+cd <repo-name>
+
+# Build the project
 make
-./netlist_viewer ../examples/half_adder.xml
+
+# Run with a target netlist
+./netlist_viewer examples/halfadder.xml
+```
 
 
