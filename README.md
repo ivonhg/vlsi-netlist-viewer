@@ -2,7 +2,8 @@
 
 A lightweight Electronic Design Automation (EDA) tool developed in C++ and Qt to model, parse, and visually inspect hierarchical electronic netlists.
 
-![GUI Demo](doc/screenshots/viewer_demo.png)
+## Demo
+![VLSI Netlist Viewer - Half Adder Demo](doc/ex2.png)
 
 ## Overview
 This project implements a complete object-oriented infrastructure for VLSI circuit representation:
@@ -27,3 +28,5 @@ mkdir build && cd build
 cmake ..
 make
 ./netlist_viewer ../examples/half_adder.xml
+
+
