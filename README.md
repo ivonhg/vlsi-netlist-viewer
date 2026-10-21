@@ -30,19 +30,23 @@ Modern VLSI CAD flows rely on robust internal graph representations to manipulat
 - **Build System:** Make / CMake
 
 ## Architecture Overview
+## Architecture Overview
+
+```text
 [XML Netlist File]
-│
-▼ (Parser / Deserializer)
+        │
+        ▼ (Parser / Deserializer)
 ┌────────────────────────────────────────┐
 │             Core Data Model            │
 │  Cell ──< Instance ──< Net ──< Node    │
 └──────────────────┬─────────────────────┘
-│ (Signals / Slots & Event Loop)
-▼
+                   │ (Signals / Slots & Event Loop)
+                   ▼
 ┌────────────────────────────────────────┐
 │             Qt GUI Engine              │
 │   CellWidget ── QPainter ── Symbol     │
 └────────────────────────────────────────┘
+```
 
 ## Running the Application
 ```bash
