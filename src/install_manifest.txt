@@ -1,8 +1,0 @@
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/bin/tme45
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/include/Indentation.h
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/include/Term.h
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/include/Net.h
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/include/Instance.h
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/include/Point.h
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/include/Node.h
-/home/yvonne/Documents/M1_SESI/MOBJ/tp4/src/../install/include/Cell.h
